@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play +</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+            <div class="container">
+                <div class="music-player">
+                <!--add icons for menu-->
+                <nav>
+                    <div class="back"><img src="arrow-left.svg"></div>
+                    <div class="back"><img src="list (1).svg"></div>
+                </nav>
+                <img src="e496934ccf43db74dbe047243efcba28.1000x1000x1.png" class="song-img">
+                    <h1>DOLLAZ ON MY HEAD</h1>
+                    <P>Gunna Ft Young Thug</P>
+                <audio  id="song" >
+                    <!--remove controls function after adding icons-->
+                    <source src="[SPOTIFY-DOWNLOADER.COM] DOLLAZ ON MY HEAD (feat. Young Thug).mp3" type="audio/mpeg">
+                </audio>
+                <input type="range" value="0" id="progress">
+
+                <div class="controls">
+                    <!--add 3 icons backward, pause, forward-->
+                    <!--look how to change the icon form pause to play-->
+                    <div><img src="skip-start.svg"></div>
+                    <div onclick="playPause()"><img src="play.svg" id="ctrlIcon"></div>
+                    <div><img src="skip-end.svg"></div>
+                </div>
+                </div>
+            </div>
+    <script>
+
+        let progress= document.getElementById('progress');
+        let song= document.getElementById('song');
+        let ctrlIcon= document.getElementById('ctrlIcon');
+        //add icons and on the play icon add the id ctrlIcon
+
+        song.onloadedmetadata= function (){
+            progress.max =song.duration;
+            progress.value = song.currentTime;
+        }
+
+        function playPause(){
+            if(ctrlIcon.classList.contains("pause-fill.svg")){
+                song.pause();
+                ctrlIcon.classList.remove("pause-fill.svg");
+                ctrlIcon.classList.add("play.svg");
+            }else{
+                song.play();
+                ctrlIcon.classList.add("pause-fill.svg");
+                ctrlIcon.classList.remove("play.svg");
+            }
+        }
+
+
+if(song.play()){
+    setInterval(()=>{
+        progress.value = song.currentTime;
+    },500)
+}
+
+progress.onchange= function(){
+    song.play();
+    song.currentTime= progress.value;
+    ctrlIcon.classList.add("fa-pause");
+    ctrlIcon.classList.remove("fa-play");
+}
+
+    </script>
+</body>
+</html>
